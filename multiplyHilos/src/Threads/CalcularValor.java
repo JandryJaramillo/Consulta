@@ -1,28 +1,28 @@
 package Threads;
 
-public class TaskCalcElement extends Thread {
+public class CalcularValor extends Thread {
 
-    private Matriz m1;
-    private Matriz m2;
-    private int rowIndex;
+    private Matrix m1;
+    private Matrix m2;
+    private int filaIndex;
     private int colIndex;
     private int element;
 
-    public TaskCalcElement (Matriz m1, Matriz m2, int rowIndex, int colIndex){
+    public CalcularValor(Matrix m1, Matrix m2, int filaIndex, int colIndex){
 
         this.m1 = m1;
         this.m2 = m2;
-        this.rowIndex = rowIndex;
+        this.filaIndex = filaIndex;
         this.colIndex = colIndex;
 
     }
 
     @Override
     public void run() {
-        element = calcValue(m1.getRow(rowIndex), m2.getColumn(colIndex));
+        element = calcValor(m1.getRow(filaIndex), m2.getColumn(colIndex));
     }
 
-    private int calcValue (int[] row, int[] col){
+    private int calcValor(int[] row, int[] col){
         int aux = 0;
         for(var i = 0; i < row.length; i++){
             aux += row[i] * col[i];
@@ -31,6 +31,6 @@ public class TaskCalcElement extends Thread {
     }
 
     public int getElement() {return element;}
-    public int getRowIndex() {return rowIndex;}
+    public int getFilaIndex() {return filaIndex;}
     public int getColIndex() {return colIndex;}
 }

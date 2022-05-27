@@ -3,20 +3,20 @@ package Threads;
 public class Main {
     public static void main(String[] args) throws InterruptedException {
 
-        int [][] mat1Values = new int[][]{
-                {1,2},
-                {3,4},
-                {5,6},
+        int [][] matrix1Values = new int[][]{
+                {8,2},
+                {10,4},
+                {12,6},
         };
-        Matriz m1 = new Matriz(mat1Values);
+        Matrix m1 = new Matrix(matrix1Values);
 
-        int [][] mat2Values = {
-                {1, 2, 3},
-                {3, 4, 5}
+        int [][] matrix2Values = {
+                {1, 7, 3},
+                {9, 11, 5}
         };
-        Matriz m2 = new Matriz(mat2Values);
+        Matrix m2 = new Matrix(matrix2Values);
 
-        Matriz result = m1.multiplyWithThreads(m2);
+        Matrix result = m1.multThreads(m2);
 
         System.out.println(result);
     }

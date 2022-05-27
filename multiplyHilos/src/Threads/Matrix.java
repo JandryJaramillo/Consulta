@@ -2,35 +2,35 @@ package Threads;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Matriz {
+public class Matrix {
     private int[][] values;
 
-    public Matriz(int[][] values) {
+    public Matrix(int[][] values) {
         this.values = values;
     }
-    public Matriz multiplyWithThreads(Matriz mat2) throws InterruptedException {
-        List<TaskCalcElement> threads = new ArrayList<>();
+    public Matrix multThreads(Matrix mat2) throws InterruptedException {
+        List<CalcularValor> threads = new ArrayList<>();
 
         if (values.length == mat2.values[0].length){
             int[][] output = new int[values.length][mat2.values[0].length];
 
             for (var i = 0; i < output.length; i++){
                 for (var j = 0; j < output[0].length; j++) {
-                    TaskCalcElement thread = new TaskCalcElement(this,mat2,i,j);
+                    CalcularValor thread = new CalcularValor(this,mat2,i,j);
                     thread.start();
                     threads.add(thread);
                 }
             }
             setWaitThreads(threads);
             for (var t : threads) {
-                output[t.getRowIndex()][t.getColIndex()] = t.getElement();
+                output[t.getFilaIndex()][t.getColIndex()] = t.getElement();
             }
-            return new Matriz(output);
+            return new Matrix(output);
         }else{
             throw new IllegalArgumentException("No se puede multiplicar");
         }
     }
-    private void setWaitThreads(List<TaskCalcElement> threads) throws InterruptedException{
+    private void setWaitThreads(List<CalcularValor> threads) throws InterruptedException{
         for (var t: threads){
             t.join();
         }
@@ -53,7 +53,7 @@ public class Matriz {
         }
         return output;
     }
-    // formatea  la matriz
+    // format matriz
     public String toString() {
         String output = "";
         for (var fila : values) {
@@ -61,8 +61,8 @@ public class Matriz {
             for (var value : fila) {
                 output += value + "\t";
             }
-            output += "}\n";
+            output +="}\n";
         }
-        return "{\n" + output + "}";
+        return "{\n"+ output +"}";
     }
 }
